@@ -132,14 +132,14 @@ const LeaveApplication = () => {
     };
 
     const icons = {
-      Approved: <CheckCircle className="w-4 h-4 mr-1" />,
-      Pending: <Clock3 className="w-4 h-4 mr-1" />,
-      Rejected: <XCircle className="w-4 h-4 mr-1" />,
+      Approved: <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />,
+      Pending: <Clock3 className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />,
+      Rejected: <XCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />,
     };
 
     return (
       <div
-        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium ${styles[status]}`}
+        className={`inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs sm:text-sm font-medium ${styles[status]}`}
       >
         {icons[status]}
         {status}
@@ -154,28 +154,28 @@ const LeaveApplication = () => {
       <Toaster position="top-center" />
 
       <div className="relative min-h-screen ml-0 bg-gray-50 md:ml-32">
-        <div className="p-6">
+        <div className="p-3 sm:p-4 md:p-6">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
               {/* Leave Application Form */}
               <div className="lg:col-span-2">
                 <Card className="shadow-lg">
                   <CardHeader className="border-b bg-white">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-blue-100 rounded-lg">
-                        <FileText className="w-6 h-6 text-blue-600" />
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="p-1.5 sm:p-2 bg-blue-100 rounded-lg">
+                        <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                       </div>
-                      <CardTitle className="text-2xl font-bold">
+                      <CardTitle className="text-xl sm:text-2xl font-bold">
                         Leave Application
                       </CardTitle>
                     </div>
                   </CardHeader>
 
-                  <CardContent className="p-6">
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <CardContent className="p-3 sm:p-4 md:p-6">
+                    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         <div className="space-y-2">
-                          <label className="text-sm font-medium text-gray-700">
+                          <label className="text-xs sm:text-sm font-medium text-gray-700">
                             Leave Type *
                           </label>
                           <Select
@@ -184,7 +184,7 @@ const LeaveApplication = () => {
                               setFormData({ ...formData, leaveType: value })
                             }
                           >
-                            <SelectTrigger>
+                            <SelectTrigger className="text-xs sm:text-sm">
                               <SelectValue placeholder="Select leave type" />
                             </SelectTrigger>
                             <SelectContent>
@@ -198,12 +198,12 @@ const LeaveApplication = () => {
                         </div>
 
                         <div className="space-y-2">
-                          <label className="text-sm font-medium text-gray-700">
+                          <label className="text-xs sm:text-sm font-medium text-gray-700">
                             Duration *
                           </label>
-                          <div className="grid grid-cols-2 gap-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                             <div className="relative">
-                              <Calendar className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                              <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                               <input
                                 type="date"
                                 value={formData.startDate}
@@ -213,11 +213,11 @@ const LeaveApplication = () => {
                                     startDate: e.target.value,
                                   })
                                 }
-                                className="w-full pl-10 border rounded-md h-11"
+                                className="w-full pl-9 sm:pl-10 border rounded-md h-10 sm:h-11 text-xs sm:text-sm"
                               />
                             </div>
                             <div className="relative">
-                              <Calendar className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                              <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                               <input
                                 type="date"
                                 value={formData.endDate}
@@ -227,7 +227,7 @@ const LeaveApplication = () => {
                                     endDate: e.target.value,
                                   })
                                 }
-                                className="w-full pl-10 border rounded-md h-11"
+                                className="w-full pl-9 sm:pl-10 border rounded-md h-10 sm:h-11 text-xs sm:text-sm"
                               />
                             </div>
                           </div>
@@ -235,7 +235,7 @@ const LeaveApplication = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-700">
+                        <label className="text-xs sm:text-sm font-medium text-gray-700">
                           Reason for Leave *
                         </label>
                         <Textarea
@@ -244,26 +244,27 @@ const LeaveApplication = () => {
                             setFormData({ ...formData, reason: e.target.value })
                           }
                           placeholder="Please provide a detailed reason for your leave request..."
-                          className="min-h-[120px]"
+                          className="min-h-[100px] sm:min-h-[120px] text-xs sm:text-sm"
                         />
                       </div>
 
-                      <div className="flex justify-end gap-4">
+                      <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4">
                         <Button
                           type="button"
                           variant="outline"
                           onClick={() => navigate(-1)}
+                          className="text-xs sm:text-sm"
                         >
                           Cancel
                         </Button>
                         <Button
                           type="submit"
-                          className="bg-blue-600 hover:bg-blue-700"
+                          className="bg-blue-600 hover:bg-blue-700 text-xs sm:text-sm"
                           disabled={loading}
                         >
                           {loading ? (
                             <>
-                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                              <Loader2 className="w-3 h-3 sm:w-4 sm:h-4 mr-2 animate-spin" />
                               Submitting...
                             </>
                           ) : (
@@ -280,26 +281,26 @@ const LeaveApplication = () => {
               <div className="lg:col-span-1">
                 <Card className="shadow-lg">
                   <CardHeader className="border-b">
-                    <CardTitle className="text-xl font-semibold">
+                    <CardTitle className="text-lg sm:text-xl font-semibold">
                       Leave Status
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="p-6">
+                  <CardContent className="p-3 sm:p-4 md:p-6">
                     {leaveHistory.length === 0 ? (
-                      <p className="text-gray-500">No leave records found.</p>
+                      <p className="text-gray-500 text-xs sm:text-sm">No leave records found.</p>
                     ) : (
-                      <div className="space-y-6">
+                      <div className="space-y-4 sm:space-y-6">
                         {leaveHistory.map((leave) => (
                           <div
                             key={leave._id}
-                            className="p-4 border rounded-lg space-y-3"
+                            className="p-3 sm:p-4 border rounded-lg space-y-2 sm:space-y-3"
                           >
-                            <div className="flex justify-between items-start">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0">
                               <div className="space-y-1">
-                                <h3 className="font-medium">
+                                <h3 className="font-medium text-sm sm:text-base">
                                   {leave.leaveType}
                                 </h3>
-                                <p className="text-sm text-gray-500">
+                                <p className="text-xs sm:text-sm text-gray-500">
                                   {new Date(
                                     leave.startDate
                                   ).toLocaleDateString()}{" "}
@@ -314,7 +315,7 @@ const LeaveApplication = () => {
 
                             {leave.updatedBy && (
                               <div className="pt-2 border-t">
-                                <p className="text-sm text-gray-600">
+                                <p className="text-xs sm:text-sm text-gray-600">
                                   Updated by{" "}
                                   <span className="font-medium">
                                     {leave.updatedBy}
@@ -329,15 +330,15 @@ const LeaveApplication = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="mt-6 shadow-lg bg-blue-50 border-blue-200">
-                  <CardContent className="p-4">
-                    <div className="flex gap-3">
-                      <Clock className="w-5 h-5 text-blue-500 mt-0.5" />
+                <Card className="mt-4 sm:mt-6 shadow-lg bg-blue-50 border-blue-200">
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex gap-2 sm:gap-3">
+                      <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <h3 className="font-medium text-blue-900">
+                        <h3 className="font-medium text-blue-900 text-sm sm:text-base">
                           Processing Time
                         </h3>
-                        <p className="mt-1 text-sm text-blue-700">
+                        <p className="mt-1 text-xs sm:text-sm text-blue-700">
                           Leave applications are typically processed within
                           24–48 hours.
                         </p>

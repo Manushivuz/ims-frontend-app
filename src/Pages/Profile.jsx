@@ -119,21 +119,21 @@ export default function AccountDetails() {
     <div className="bg-gray-50 min-h-screen">
       <SideNav />
       <Navbar />
-      <div className="pt-20 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">My Profile</h1>
-          <p className="text-gray-500 mt-1">
+      <div className="pt-16 sm:pt-20 pb-8 sm:pb-12 px-3 sm:px-4 md:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">My Profile</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">
             Manage your personal information and preferences
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {/* Profile Card */}
           <div className="lg:col-span-1">
             <Card className="bg-white shadow-sm border-0 overflow-hidden">
-              <div className="bg-gradient-to-r from-indigo-500 to-purple-600 h-24"></div>
-              <div className="px-6 pb-6 -mt-12 flex flex-col items-center">
-                <Avatar className="w-24 h-24 rounded-full border-4 border-white bg-white text-indigo-600 flex items-center justify-center font-bold text-3xl overflow-hidden shadow-md">
+              <div className="bg-gradient-to-r from-indigo-500 to-purple-600 h-16 sm:h-20 lg:h-24"></div>
+              <div className="px-4 sm:px-6 pb-4 sm:pb-6 -mt-8 sm:-mt-10 lg:-mt-12 flex flex-col items-center">
+                <Avatar className="w-20 h-20 sm:w-24 sm:h-24 lg:w-24 lg:h-24 rounded-full border-4 border-white bg-white text-indigo-600 flex items-center justify-center font-bold text-2xl sm:text-3xl overflow-hidden shadow-md">
                   {profilePicture ? (
                     <img
                       src={profilePicture}
@@ -144,14 +144,14 @@ export default function AccountDetails() {
                     getInitials(formDetails.fullName)
                   )}
                 </Avatar>
-                <div className="mt-4 text-center capitalize">
-                  <h2 className="text-xl font-bold text-gray-900">
+                <div className="mt-3 sm:mt-4 text-center capitalize">
+                  <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                     {formDetails.fullName || "Your Name"}
                   </h2>
-                  <p className="text-gray-500 text-sm mt-1">
+                  <p className="text-gray-500 text-xs sm:text-sm mt-1">
                     {formDetails.email}
                   </p>
-                  <p className="text-gray-600 text-sm mt-2">
+                  <p className="text-gray-600 text-xs sm:text-sm mt-2">
                     Current Role:{" "}
                     <b>{formDetails.currentRole || "Your Role"}</b>
                   </p>
@@ -159,7 +159,7 @@ export default function AccountDetails() {
 
                 <Button
                   onClick={() => navigate("/reset-account-password")}
-                  className="w-full mt-4 bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 transition-colors"
+                  className="w-full mt-3 sm:mt-4 bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 transition-colors text-xs sm:text-sm"
                 >
                   Change Password
                 </Button>
@@ -170,15 +170,15 @@ export default function AccountDetails() {
           {/* Profile Details Form */}
           <div className="lg:col-span-2">
             <Card className="bg-white shadow-sm border-0">
-              <CardHeader className="border-b border-gray-100 pb-4">
-                <CardTitle className="text-lg font-medium text-gray-900">
+              <CardHeader className="border-b border-gray-100 pb-3 sm:pb-4">
+                <CardTitle className="text-base sm:text-lg font-medium text-gray-900">
                   Profile Information
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <CardContent className="pt-4 sm:pt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div className="space-y-2">
-                    <Label className="text-sm font-medium text-gray-700">
+                    <Label className="text-xs sm:text-sm font-medium text-gray-700">
                       Full Name
                     </Label>
                     <Input
@@ -187,12 +187,12 @@ export default function AccountDetails() {
                       onChange={(e) =>
                         handleInputChange("fullName", e.target.value)
                       }
-                      className="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md"
+                      className="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md text-xs sm:text-sm"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label className="text-sm font-medium text-gray-700">
+                    <Label className="text-xs sm:text-sm font-medium text-gray-700">
                       Current Role
                     </Label>
                     <Input
@@ -202,12 +202,12 @@ export default function AccountDetails() {
                       onChange={(e) =>
                         handleInputChange("currentRole", e.target.value)
                       }
-                      className="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md"
+                      className="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md text-xs sm:text-sm"
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label className="text-sm font-medium text-gray-700">
+                  <div className="space-y-2 sm:col-span-2">
+                    <Label className="text-xs sm:text-sm font-medium text-gray-700">
                       Phone Number
                     </Label>
                     <Input
@@ -221,16 +221,16 @@ export default function AccountDetails() {
                         }
                         handleInputChange("phoneNumber", value);
                       }}
-                      className="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md"
+                      className="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md text-xs sm:text-sm"
                     />
                   </div>
                 </div>
 
                 <div className="hidden">
-                  <div className="mt-8 flex justify-end">
+                  <div className="mt-6 sm:mt-8 flex justify-end">
                     <Button
                       onClick={handleSave}
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-md transition-colors"
+                      className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 sm:px-6 rounded-md transition-colors text-xs sm:text-sm"
                     >
                       Save Changes
                     </Button>
@@ -239,7 +239,7 @@ export default function AccountDetails() {
 
                 {saveStatus && (
                   <div
-                    className={`mt-4 p-3 rounded-md ${
+                    className={`mt-4 p-3 rounded-md text-xs sm:text-sm ${
                       saveStatus.includes("successfully")
                         ? "bg-green-50 text-green-800 border border-green-200"
                         : "bg-red-50 text-red-800 border border-red-200"
