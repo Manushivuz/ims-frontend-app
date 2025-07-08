@@ -135,55 +135,55 @@ const SignUp = ({ onSwitchToSignin }) => {
   return (
     <>
       {/* <TopNavbar /> */}
-      <div className="flex items-center justify-center min-h-screen px-4 bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="w-full max-w-md p-8 bg-white border shadow-lg rounded-xl">
-          <div className="text-center mb-6">
-            <img src={iispprLogo} alt="Logo" className="mx-auto mb-4 w-28 h-28" />
-            <h1 className="text-3xl font-bold text-blue-800">
+      <div className="flex items-center justify-center min-h-screen px-3 sm:px-4 bg-gradient-to-br from-blue-50 to-purple-50 py-4 sm:py-6">
+        <div className="w-full max-w-sm sm:max-w-md p-4 sm:p-6 md:p-8 bg-white border shadow-lg rounded-xl">
+          <div className="text-center mb-4 sm:mb-6">
+            <img src={iispprLogo} alt="Logo" className="mx-auto mb-3 sm:mb-4 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28" />
+            <h1 className="text-2xl sm:text-3xl font-bold text-blue-800">
               {step === 1 ? "Create Your Account" : "Verify Your Email"}
             </h1>
-            <p className="text-sm text-gray-500">
+            <p className="text-xs sm:text-sm text-gray-500">
               {step === 1
                 ? "Sign up and enjoy the benefits."
                 : "Enter the OTP sent to your email."}
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             {step === 1 && <>
               <div>
-                <label className="block mb-1 text-sm text-gray-600">Full Name</label>
+                <label className="block mb-1 text-xs sm:text-sm text-gray-600">Full Name</label>
                 <div className="relative">
-                  <UserPlus className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <UserPlus className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                   <input value={fullName} onChange={e => setFullName(e.target.value)}
                     type="text" placeholder="Full Name"
-                    className="w-full pl-10 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    className="w-full pl-8 sm:pl-10 p-2.5 sm:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 text-xs sm:text-sm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block mb-1 text-sm text-gray-600">Email</label>
+                <label className="block mb-1 text-xs sm:text-sm text-gray-600">Email</label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                   <input value={email} onChange={e => setEmail(e.target.value)}
                     type="email" placeholder="Enter Email"
-                    className="w-full pl-10 p-3 border rounded-lg focus:ring-blue-300"
+                    className="w-full pl-8 sm:pl-10 p-2.5 sm:p-3 border rounded-lg focus:ring-blue-300 text-xs sm:text-sm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block mb-1 text-sm text-gray-600">Phone</label>
-                <div className="space-y-2 p-3 border rounded-lg bg-gray-50">
+                <label className="block mb-1 text-xs sm:text-sm text-gray-600">Phone</label>
+                <div className="space-y-2 p-2 sm:p-3 border rounded-lg bg-gray-50">
                   {/* Country Code Selector */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Country Code</label>
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Country Code</label>
                     <select
                       ref={countrySelectRef}
                       value={countryCode}
                       onChange={(e) => setCountryCode(e.target.value)}
-                      className="w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-xs sm:text-sm"
                     >
                       {countryCodes
                         .sort((a, b) => a.name.localeCompare(b.name))
@@ -197,15 +197,15 @@ const SignUp = ({ onSwitchToSignin }) => {
 
                   {/* Phone Number Input */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                     <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                       <input
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         type="tel"
                         placeholder="Enter phone number"
-                        className="w-full pl-10 p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full pl-8 sm:pl-10 p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-xs sm:text-sm"
                       />
                     </div>
                   </div>
@@ -213,27 +213,29 @@ const SignUp = ({ onSwitchToSignin }) => {
               </div>
 
               <div>
-                <label className="block mb-1 text-sm text-gray-600">Department</label>
+                <label className="block mb-1 text-xs sm:text-sm text-gray-600">Department</label>
                 <div className="relative">
-                  <Laptop className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Laptop className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                   <select value={department} onChange={e => setDepartment(e.target.value)}
-                    className="w-full pl-10 p-3 border rounded-lg focus:ring-blue-300"
+                    className="w-full pl-8 sm:pl-10 p-2.5 sm:p-3 border rounded-lg focus:ring-blue-300 text-xs sm:text-sm"
                   >
                     <option value="">Select department</option>
                     <option value="development">Development</option>
                     <option value="research">Research</option>
-                    <option value="communication">Communication</option>
+                    <option value="course">Course</option>
+                    <option value="communication">Communication for Interns</option>
+                    <option value="courseCommunication">Communication for Course Interns</option>
                     <option value="hr">HR</option>
                   </select>
                 </div>
               </div>
 
               {department === "research" && <div>
-                <label className="block mb-1 text-sm text-gray-600">Batch</label>
+                <label className="block mb-1 text-xs sm:text-sm text-gray-600">Batch</label>
                 <div className="relative">
-                  <Layers className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Layers className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                   <select value={selectedBatch} onChange={e => setSelectedBatch(e.target.value)}
-                    className="w-full pl-10 p-3 border rounded-lg focus:ring-blue-300"
+                    className="w-full pl-8 sm:pl-10 p-2.5 sm:p-3 border rounded-lg focus:ring-blue-300 text-xs sm:text-sm"
                   >
                     <option value="">Select Batch</option>
                     {batches.map(batch => (
@@ -246,34 +248,34 @@ const SignUp = ({ onSwitchToSignin }) => {
               </div>
               }
               <div>
-                <label className="block mb-1 text-sm text-gray-600">End Date</label>
+                <label className="block mb-1 text-xs sm:text-sm text-gray-600">End Date</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                   <input value={endDate} onChange={e => setEndDate(e.target.value)}
                     type="date" min={new Date().toISOString().split("T")[0]}
-                    className="w-full pl-10 p-3 border rounded-lg focus:ring-blue-300"
+                    className="w-full pl-8 sm:pl-10 p-2.5 sm:p-3 border rounded-lg focus:ring-blue-300 text-xs sm:text-sm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block mb-1 text-sm text-gray-600">Password</label>
+                <label className="block mb-1 text-xs sm:text-sm text-gray-600">Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                   <input value={password} onChange={e => setPassword(e.target.value)}
                     type="password" placeholder="Password"
-                    className="w-full pl-10 p-3 border rounded-lg focus:ring-blue-300"
+                    className="w-full pl-8 sm:pl-10 p-2.5 sm:p-3 border rounded-lg focus:ring-blue-300 text-xs sm:text-sm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block mb-1 text-sm text-gray-600">Confirm Password</label>
+                <label className="block mb-1 text-xs sm:text-sm text-gray-600">Confirm Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                   <input value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
                     type="password" placeholder="Confirm Password"
-                    className="w-full pl-10 p-3 border rounded-lg focus:ring-blue-300"
+                    className="w-full pl-8 sm:pl-10 p-2.5 sm:p-3 border rounded-lg focus:ring-blue-300 text-xs sm:text-sm"
                   />
                 </div>
               </div>
@@ -281,12 +283,12 @@ const SignUp = ({ onSwitchToSignin }) => {
 
             {step === 2 && <>
               <div>
-                <label className="block mb-1 text-sm text-gray-600">OTP</label>
+                <label className="block mb-1 text-xs sm:text-sm text-gray-600">OTP</label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                   <input value={otp} onChange={e => setOtp(e.target.value)}
                     type="text" placeholder="Enter OTP"
-                    className="w-full pl-10 p-3 border rounded-lg focus:ring-blue-300"
+                    className="w-full pl-8 sm:pl-10 p-2.5 sm:p-3 border rounded-lg focus:ring-blue-300 text-xs sm:text-sm"
                   />
                 </div>
               </div>
@@ -295,7 +297,7 @@ const SignUp = ({ onSwitchToSignin }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full p-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              className="w-full p-2.5 sm:p-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 text-xs sm:text-sm"
             >
               {isLoading
                 ? step === 1 ? "Sending OTP..." : "Verifying..."
@@ -305,18 +307,18 @@ const SignUp = ({ onSwitchToSignin }) => {
 
           <div className="mt-4 text-center">
             {step === 1 ? (
-              <p className="text-sm text-gray-500">
+              <p className="text-xs sm:text-sm text-gray-500">
                 Already have an account?{" "}
-                <a href="/login" onClick={onSwitchToSignin} className="font-semibold text-blue-700">
+                <a href="/login" onClick={onSwitchToSignin} className="font-semibold text-blue-700 text-xs sm:text-sm">
                   Log In
                 </a>
               </p>
             ) : (
-              <p className="text-sm text-gray-500">
+              <p className="text-xs sm:text-sm text-gray-500">
                 Didn't receive OTP?{" "}
                 <button
                   onClick={() => setStep(1)}
-                  className="font-semibold text-blue-700 underline"
+                  className="font-semibold text-blue-700 underline text-xs sm:text-sm"
                 >
                   Try Again
                 </button>

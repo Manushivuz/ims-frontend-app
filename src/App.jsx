@@ -75,8 +75,6 @@ import {
 import AdminHRManagement from "./Admin/AdminHRManagement.jsx";
 import UserManagement from "./Admin/UserManagement.jsx";
 import BatchManagement from "./Admin/BatchManagement.jsx";
-import ChatInterface from "./HrHeadAndIntern/InternChat.jsx";
-import HRChatDashboard from "./HrHeadAndIntern/HrChatBox.jsx";
 
 import { CommHomePage, ManageTickets, CommRanking } from "./CommunicationTeam/commIndex";
 
@@ -324,15 +322,6 @@ const App = () => {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/internchat/:receiverId"
-          element={
-            <PrivateRoute>
-
-              <ChatInterface />
-            </PrivateRoute>
-          }
-        />
         {/* <Route
           path="/AskHR"
           element={
@@ -490,22 +479,8 @@ const App = () => {
             </HrRoute>
           }
         />
-        <Route
-          path="/hrchat"
-          element={
-            <HrRoute>
-              <HRChatDashboard />
-            </HrRoute>
-          }
-        />
-        <Route
-          path="/hrchat/:receiverId"
-          element={
-            <HrRoute>
-              <HRChatDashboard />
-            </HrRoute>
-          }
-        />
+
+
         <Route
           path="/hrallattendance"
           element={

@@ -26,38 +26,38 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-20 relative">
+    <section className="py-12 sm:py-16 lg:py-20 relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1),transparent)]" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold blue-gradient-text mb-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold blue-gradient-text mb-3 sm:mb-4">
             Trusted by Leading Companies
           </h2>
-          <p className="text-xl text-gray-400">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto px-4">
             See what our partners say about their experience
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="stats-card p-8 hover:-translate-y-2 transition-transform"
+              className="stats-card p-4 sm:p-6 lg:p-8 hover:-translate-y-1 sm:hover:-translate-y-2 transition-transform"
             >
-              <div className="flex items-center mb-6">
+              <div className="flex items-center mb-4 sm:mb-6">
                 <img
                   src={testimonial.logo}
                   alt={testimonial.company}
-                  className="w-12 h-12 rounded-full mr-4"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mr-3 sm:mr-4"
                 />
                 <div>
-                  <h3 className="font-semibold text-white">{testimonial.company}</h3>
+                  <h3 className="font-semibold text-white text-sm sm:text-base">{testimonial.company}</h3>
                 </div>
               </div>
-              <p className="text-gray-400 mb-6">"{testimonial.quote}"</p>
-              <div className="border-t border-gray-800 pt-4">
-                <p className="font-semibold text-white">{testimonial.author}</p>
-                <p className="text-gray-400">{testimonial.role}</p>
+              <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">"{testimonial.quote}"</p>
+              <div className="border-t border-gray-800 pt-3 sm:pt-4">
+                <p className="font-semibold text-white text-sm sm:text-base">{testimonial.author}</p>
+                <p className="text-gray-400 text-xs sm:text-sm">{testimonial.role}</p>
               </div>
             </div>
           ))}

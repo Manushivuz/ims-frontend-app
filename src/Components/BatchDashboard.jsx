@@ -67,6 +67,8 @@ const BatchDashboard = () => {
           throw new Error("User not found")
         }
 
+        console.log(currentUser);
+
         const batchId = currentUser.batch
         if (!batchId) {
           setError("NO_BATCH_ASSIGNED")

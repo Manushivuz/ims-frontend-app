@@ -89,61 +89,64 @@ export default function Settings() {
         !open && setEditField((prev) => ({ ...prev, isOpen: false }))
       }
     >
-      <DialogContent>
+      <DialogContent className="w-full max-w-sm sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Edit {editField.label}</DialogTitle>
+          <DialogTitle className="text-lg sm:text-xl">Edit {editField.label}</DialogTitle>
         </DialogHeader>
-        <div className="py-4">
-          <Label htmlFor="value">{editField.label}</Label>
+        <div className="py-3 sm:py-4">
+          <Label htmlFor="value" className="text-sm sm:text-base">{editField.label}</Label>
           <Input
             id="value"
             value={editField.value}
             onChange={(e) =>
               setEditField((prev) => ({ ...prev, value: e.target.value }))
             }
-            className="mt-2"
+            className="mt-2 text-sm sm:text-base"
           />
         </div>
-        <DialogFooter>
+        <DialogFooter className="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <Button
             variant="outline"
             onClick={() =>
               setEditField({ isOpen: false, field: "", value: "", label: "" })
             }
+            className="w-full sm:w-auto text-sm sm:text-base"
           >
             Cancel
           </Button>
-          <Button onClick={handleSave}>Save Changes</Button>
+          <Button onClick={handleSave} className="w-full sm:w-auto text-sm sm:text-base">
+            Save Changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
+    <div className="min-h-screen bg-gray-50 p-3 sm:p-4 md:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
           Account Settings
         </h1>
 
         {/* Account Information Card */}
         <Card className="bg-white shadow-sm">
-          <CardHeader>
-            <h2 className="text-xl font-semibold text-gray-900">
+          <CardHeader className="p-4 sm:p-6">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
               Personal Information
             </h2>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <CardContent className="p-4 sm:p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {Object.entries(accountInfo).map(([key, value]) => (
                 <div key={key} className="space-y-1.5">
-                  <label className="text-sm font-medium text-gray-700">
+                  <label className="text-xs sm:text-sm font-medium text-gray-700">
                     {key.replace(/([A-Z])/g, " $1").trim()}*
                   </label>
-                  <div className="flex items-center justify-between p-2 rounded bg-gray-50">
-                    <span className="text-gray-900">{value}</span>
+                  <div className="flex items-center justify-between p-2 sm:p-3 rounded bg-gray-50">
+                    <span className="text-xs sm:text-sm text-gray-900 truncate">{value}</span>
                     <button
-                      className="p-1 hover:bg-gray-200 rounded-full transition-colors"
+                      className="p-1 sm:p-1.5 hover:bg-gray-200 rounded-full transition-colors flex-shrink-0"
                       onClick={() =>
                         handleEdit(
                           key,
@@ -152,7 +155,7 @@ export default function Settings() {
                         )
                       }
                     >
-                      <Pencil className="h-4 w-4 text-gray-600" />
+                      <Pencil className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
                     </button>
                   </div>
                 </div>
@@ -161,18 +164,18 @@ export default function Settings() {
           </CardContent>
         </Card>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Roles Section */}
           {/* <Card className="bg-white shadow-sm">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900">Roles</h2>
+            <CardHeader className="flex flex-row items-center justify-between p-4 sm:p-6">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Roles</h2>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 sm:p-6">
               <div className="space-y-3">
                 {roles.map((role, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-lg"
+                    className="flex items-center justify-between p-2 sm:p-3 hover:bg-gray-50 rounded-lg"
                   >
                     <div className="flex items-center gap-3">
                       <input
@@ -185,9 +188,9 @@ export default function Settings() {
                           setRoleChecked(newChecked);
                         }}
                       />
-                      <span className="text-gray-900">{role.name}</span>
+                      <span className="text-sm sm:text-base text-gray-900">{role.name}</span>
                     </div>
-                    <button className="text-sm text-red-600 hover:text-red-700">
+                    <button className="text-xs sm:text-sm text-red-600 hover:text-red-700">
                       {role.action}
                     </button>
                   </div>
@@ -198,17 +201,17 @@ export default function Settings() {
 
           {/* Permissions Section */}
           {/* <Card className="bg-white shadow-sm">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900">
+            <CardHeader className="flex flex-row items-center justify-between p-4 sm:p-6">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 Permissions
               </h2>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 sm:p-6">
               <div className="space-y-3">
                 {permissions.map((permission, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-lg"
+                    className="flex items-center justify-between p-2 sm:p-3 hover:bg-gray-50 rounded-lg"
                   >
                     <div className="flex items-center gap-3">
                       <input
@@ -221,9 +224,9 @@ export default function Settings() {
                           setPermissionChecked(newChecked);
                         }}
                       />
-                      <span className="text-gray-900">{permission.name}</span>
+                      <span className="text-sm sm:text-base text-gray-900">{permission.name}</span>
                     </div>
-                    <span className="text-sm text-gray-600">
+                    <span className="text-xs sm:text-sm text-gray-600">
                       {permission.actions.join(", ")}
                     </span>
                   </div>

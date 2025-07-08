@@ -252,25 +252,36 @@ const TopNavbar = () => {
   ];
 
   useEffect(() => {
-    if (loggedIn) {
-      const fetchNotifications = async () => {
+    const fetchNotifications = async () => {
+      try {
         const userId = localStorage.getItem("userId");
-        try {
-          const response = await fetch(
-            `https://iisppr-backend.vercel.app/get-notifications?userId=${userId}`
-          );
-          if (!response.ok) throw new Error("Failed to fetch notifications");
+        const reqbody = { userId: userId };
+        const response = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/get-notifications`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(reqbody),
+          }
+        );
+        if (response.ok) {
           const data = await response.json();
-          setNotiCounter(data.notifications.notifications.length);
-        } catch (error) {
-          console.error("Error fetching notifications:", error);
+          if (data?.notifications?.notifications) {
+            setNotiCounter(data.notifications.notifications.length);
+          }
         }
-      };
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    };
+
+    if (loggedIn) {
       fetchNotifications();
     }
-  }, [loggedIn]);
+  }, [loggedIn, setNotiCounter]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isDropdownOpen && !event.target.closest(".user-dropdown")) {
@@ -279,33 +290,34 @@ const TopNavbar = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isDropdownOpen]);
 
   return (
-    <div className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="flex items-center justify-between p-4 border-b relative">
+    <div className="relative">
+      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
         {/* Mobile Header */}
-        <div className="md:hidden flex items-center justify-between w-full">
-          <button
-            className="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-md p-1 transition-colors"
-            onClick={() => setIsSidebarOpen((prev) => !prev)}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
+        <div className="md:hidden flex items-center justify-between p-3 sm:p-4">
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-md p-1 transition-colors"
+              onClick={() => setIsSidebarOpen(true)}
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+            <Link to="/" className="flex items-center group">
+              <div className="flex flex-row items-center">
+                <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                <span className="text-base sm:text-lg font-semibold ml-1 sm:ml-2 text-gray-800">
+                  IISPPR Intern Hub
+                </span>
+              </div>
+            </Link>
+          </div>
 
-          <Link to="/" className="flex items-center">
-            <div className="flex flex-row items-center">
-              <Building2 className="w-6 h-6 text-blue-600" />
-              <span className="text-lg font-semibold ml-2 text-gray-800">
-                IISPPR Intern Hub
-              </span>
-            </div>
-          </Link>
-
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1 sm:space-x-2">
             {loggedIn && <NotiBadge count={notiCounter} />}
             <Button
               variant="ghost"
@@ -314,34 +326,34 @@ const TopNavbar = () => {
               onClick={() => setIsSearchVisible(!isSearchVisible)}
             >
               {!isSearchVisible ? (
-                <Search className="h-5 w-5" />
+                <Search className="h-4 w-4 sm:h-5 sm:w-5" />
               ) : (
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4 sm:h-5 sm:w-5" />
               )}
             </Button>
           </div>
         </div>
 
         {/* Desktop Header */}
-        <div className="hidden md:flex items-center justify-between w-full">
+        <div className="hidden md:flex items-center justify-between w-full p-3 sm:p-4 lg:p-6">
           <Link to="/" className="flex items-center group">
             <div className="flex flex-row items-center">
-              <Building2 className="w-6 h-6 text-blue-600 group-hover:text-blue-700 transition-colors" />
-              <span className="text-lg font-semibold ml-2 text-gray-800 group-hover:text-black transition-colors">
+              <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 group-hover:text-blue-700 transition-colors" />
+              <span className="text-base sm:text-lg font-semibold ml-1 sm:ml-2 text-gray-800 group-hover:text-black transition-colors">
                 IISPPR Intern Hub
               </span>
             </div>
           </Link>
 
-          <div className="relative w-1/3">
+          <div className="relative w-1/3 max-w-md">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
                 placeholder="Search pages..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-2.5 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm sm:text-base"
               />
             </div>
 
@@ -355,9 +367,9 @@ const TopNavbar = () => {
                       setSearchQuery("");
                       setSearchResults([]);
                     }}
-                    className="px-4 py-3 hover:bg-blue-50 cursor-pointer transition-colors flex items-center"
+                    className="px-3 sm:px-4 py-2 sm:py-3 hover:bg-blue-50 cursor-pointer transition-colors flex items-center text-sm sm:text-base"
                   >
-                    <div className="w-1 h-6 bg-blue-500 rounded-full mr-3 opacity-0 hover:opacity-100 transition-opacity"></div>
+                    <div className="w-1 h-4 sm:h-6 bg-blue-500 rounded-full mr-2 sm:mr-3 opacity-0 hover:opacity-100 transition-opacity"></div>
                     {result.label}
                   </div>
                 ))}
@@ -365,16 +377,16 @@ const TopNavbar = () => {
             )}
           </div>
 
-          <div className="flex items-center space-x-5">
+          <div className="flex items-center space-x-3 sm:space-x-5">
             {loggedIn && (
               <div className="relative">
                 <Link
                   to="/notifications"
-                  className="relative p-2 rounded-full transition-colors"
+                  className="relative p-1.5 sm:p-2 rounded-full transition-colors"
                 >
-                  <Bell className="w-5 h-5 text-gray-600" />
+                  <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
                   {notiCounter > 0 && (
-                    <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
+                    <span className="absolute -top-1 -right-1 inline-flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 text-xs font-bold text-white bg-red-500 rounded-full">
                       {notiCounter > 9 ? "9+" : notiCounter}
                     </span>
                   )}
@@ -385,23 +397,23 @@ const TopNavbar = () => {
             {loggedIn ? (
               <div className="relative user-dropdown">
                 <div
-                  className="flex items-center space-x-2 cursor-pointer p-1 rounded-full hover:bg-gray-100 transition-colors"
+                  className="flex items-center space-x-1 sm:space-x-2 cursor-pointer p-1 rounded-full hover:bg-gray-100 transition-colors"
                   onClick={() => setIsDropdownOpen((prev) => !prev)}
                 >
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                    <UserRound className="w-5 h-5 text-blue-600" />
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                    <UserRound className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                   </div>
                   <ChevronDown
-                    className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                    className={`w-3 h-3 sm:w-4 sm:h-4 text-gray-500 transition-transform duration-200 ${
                       isDropdownOpen ? "rotate-180" : ""
                     }`}
                   />
                 </div>
 
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg z-10 overflow-hidden">
-                    <div className="p-3 border-b border-gray-100">
-                      <p className="text-sm font-medium text-gray-900">
+                  <div className="absolute right-0 mt-2 w-48 sm:w-56 bg-white border rounded-lg shadow-lg z-10 overflow-hidden">
+                    <div className="p-2 sm:p-3 border-b border-gray-100">
+                      <p className="text-xs sm:text-sm font-medium text-gray-900">
                         User Menu
                       </p>
                       <p className="text-xs text-gray-500">
@@ -416,13 +428,13 @@ const TopNavbar = () => {
                             navigate(option.path);
                             setIsDropdownOpen(false);
                           }}
-                          className={`flex items-center px-4 py-2 hover:bg-blue-50 cursor-pointer transition-colors ${
+                          className={`flex items-center px-3 sm:px-4 py-2 hover:bg-blue-50 cursor-pointer transition-colors text-sm ${
                             option.label === "Logout"
                               ? "text-red-500 mt-2 border-t border-gray-100"
                               : "text-gray-700"
                           }`}
                         >
-                          <span className="mr-3 text-gray-500">
+                          <span className="mr-2 sm:mr-3 text-gray-500">
                             {option.icon}
                           </span>
                           {option.label}
@@ -433,17 +445,17 @@ const TopNavbar = () => {
                 )}
               </div>
             ) : (
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2 sm:space-x-3">
                 <Button
                   variant="outline"
-                  className="px-4 py-2 text-blue-600 border border-blue-600 hover:bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors"
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 text-blue-600 border border-blue-600 hover:bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors text-xs sm:text-sm"
                   onClick={() => navigate("/signup")}
                 >
                   Sign Up
                 </Button>
                 <Button
                   variant="primary"
-                  className="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors"
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors text-xs sm:text-sm"
                   onClick={() => navigate("/login")}
                 >
                   Login
@@ -457,13 +469,13 @@ const TopNavbar = () => {
         {isSearchVisible && (
           <div className="absolute top-full left-0 w-full p-3 bg-white border-b shadow-md md:hidden">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
                 placeholder="Search pages..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm sm:text-base"
                 autoFocus
               />
 
@@ -478,7 +490,7 @@ const TopNavbar = () => {
                         setSearchResults([]);
                         setIsSearchVisible(false);
                       }}
-                      className="px-4 py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-0"
+                      className="px-3 sm:px-4 py-2 sm:py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-0 text-sm sm:text-base"
                     >
                       {result.label}
                     </div>
@@ -492,31 +504,31 @@ const TopNavbar = () => {
         {/* Mobile Sidebar */}
         {isSidebarOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex">
-            <div className="bg-white w-72 h-full shadow-lg flex flex-col">
-              <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+            <div className="bg-white w-72 sm:w-80 h-full shadow-lg flex flex-col">
+              <div className="p-3 sm:p-4 border-b border-gray-200 flex items-center justify-between">
                 <div className="flex items-center">
-                  <Building2 className="w-6 h-6 text-blue-600" />
-                  <span className="text-lg font-semibold ml-2 text-gray-800">
+                  <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                  <span className="text-base sm:text-lg font-semibold ml-1 sm:ml-2 text-gray-800">
                     IISPPR Intern Hub
                   </span>
                 </div>
                 <button
-                  className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                  className="text-gray-500 hover:text-gray-700 focus:outline-none p-1"
                   onClick={() => setIsSidebarOpen(false)}
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </div>
 
               {loggedIn && (
-                <div className="p-4 border-b border-gray-200">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                      <UserRound className="w-6 h-6 text-blue-600" />
+                <div className="p-3 sm:p-4 border-b border-gray-200">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                      <UserRound className="w-4 h-4 sm:w-6 sm:h-6 text-blue-600" />
                     </div>
                     <div>
-                      <p className="font-medium text-gray-800">Welcome</p>
-                      <p className="text-sm text-gray-500">User Account</p>
+                      <p className="font-medium text-gray-800 text-sm sm:text-base">Welcome</p>
+                      <p className="text-xs sm:text-sm text-gray-500">User Account</p>
                     </div>
                   </div>
                 </div>
@@ -529,14 +541,14 @@ const TopNavbar = () => {
                       key={route.path}
                       to={route.path}
                       onClick={() => setIsSidebarOpen(false)}
-                      className={`flex items-center px-4 py-3 hover:bg-blue-50 rounded-lg transition-colors ${
+                      className={`flex items-center px-3 sm:px-4 py-2 sm:py-3 hover:bg-blue-50 rounded-lg transition-colors text-sm sm:text-base ${
                         location.pathname === route.path
                           ? "bg-blue-50 text-blue-600 font-medium"
                           : "text-gray-700"
                       }`}
                     >
                       {location.pathname === route.path && (
-                        <div className="w-1 h-5 bg-blue-500 rounded-full mr-3"></div>
+                        <div className="w-1 h-4 sm:h-5 bg-blue-500 rounded-full mr-2 sm:mr-3"></div>
                       )}
                       {route.label}
                     </Link>
@@ -545,14 +557,14 @@ const TopNavbar = () => {
               </nav>
 
               {loggedIn && (
-                <div className="p-4 border-t border-gray-200">
+                <div className="p-3 sm:p-4 border-t border-gray-200">
                   <Link
                     to="/logout"
                     onClick={() => setIsSidebarOpen(false)}
-                    className="flex items-center text-red-500 px-4 py-2 hover:bg-red-50 rounded-lg transition-colors"
+                    className="flex items-center text-red-500 px-3 sm:px-4 py-2 hover:bg-red-50 rounded-lg transition-colors text-sm sm:text-base"
                   >
                     <svg
-                      className="w-5 h-5 mr-3"
+                      className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
