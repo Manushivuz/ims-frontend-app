@@ -10,32 +10,26 @@ const Hero = () => {
   };
 
   return (
-    <div className="pt-16 sm:pt-20 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1),transparent_70%)]" />
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-12 sm:py-16 lg:py-20 relative">
-        <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 blue-gradient-text leading-tight">
-            Trusted by 2M+ students
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-2xl sm:max-w-3xl mx-auto px-4">
-            Expand your skills with our trusted platform, chosen by millions worldwide
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            <button
-              onClick={handleGetConnected} // Attach the click handler
-              className="bg-blue-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-md hover:bg-blue-700 transition-colors glow-effect text-sm sm:text-base font-medium">
-              Get Connected
-            </button>
-          </div>
-        </div>
-
-        <div className="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {[
-            {
-              icon: <Users className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-blue-500" />,
-              title: "Global Community",
-              description: "Join millions of learners worldwide",
-            },
+    <div className="relative bg-gradient-to-r from-blue-600 to-blue-700">
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
+      <div className="relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <div className="text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+              Welcome to IISPPR Intern Hub
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 sm:mb-8">
+              Your gateway to professional growth and development
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button
+                onClick={handleGetConnected} // Attach the click handler
+                className="bg-white text-blue-600 px-6 py-2 sm:px-8 sm:py-3 rounded-full font-semibold hover:bg-blue-50 transition-all duration-200">
+                Get Started
+              </button>
+              <button className="bg-transparent text-white px-6 py-2 sm:px-8 sm:py-3 rounded-full border border-white hover:bg-white/10 transition-all duration-200">
+                Learn More
+              </button>
             {
               icon: <BookOpen className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-blue-500" />,
               title: "Expert-Led Content",

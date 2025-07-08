@@ -9,8 +9,21 @@ const SideNav = () => {
   const [content, setContent] = useState("Content for Home");
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Update window width on resize
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      if (window.innerWidth >= 1024) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const mainContent = document.getElementById("mainContent");
@@ -18,14 +31,14 @@ const SideNav = () => {
 
     // Sidebar hover effect - only on desktop
     const handleMouseEnter = () => {
-      if (window.innerWidth >= 1024) { // lg breakpoint
+      if (windowWidth >= 1024) { // lg breakpoint
         setIsExpanded(true);
         if (mainContent) mainContent.style.marginLeft = "16rem";
       }
     };
 
     const handleMouseLeave = () => {
-      if (window.innerWidth >= 1024) { // lg breakpoint
+      if (windowWidth >= 1024) { // lg breakpoint
         setIsExpanded(false);
         if (mainContent) mainContent.style.marginLeft = "4rem";
       }
@@ -57,11 +70,41 @@ const SideNav = () => {
 
   // Menu items
   const menuItems = [
-    { id: 0, name: "Home", icon: "bi-house" },
-    { id: 1, name: "Projects", icon: "bi-people" },
-    { id: 2, name: "Rankings", icon: "bi-trophy" },
-    { id: 3, name: "Setting", icon: "bi-gear" },
-    { id: 4, name: "Help", icon: "bi-question-circle" }
+    {
+      id: "home",
+      name: "Home",
+      icon: <Home className="w-5 h-5" />,
+      path: "/",
+      mobileIcon: <Home className="w-5 h-5" />,
+    },
+    {
+      id: "projects",
+      name: "Projects",
+      icon: "bi-people",
+      path: "/projects",
+      mobileIcon: "bi-people",
+    },
+    {
+      id: "rankings",
+      name: "Rankings",
+      icon: "bi-trophy",
+      path: "/intern-rankings",
+      mobileIcon: "bi-trophy",
+    },
+    {
+      id: "setting",
+      name: "Setting",
+      icon: "bi-gear",
+      path: "/Setting",
+      mobileIcon: "bi-gear",
+    },
+    {
+      id: "help",
+      name: "Help",
+      icon: "bi-question-circle",
+      path: "/help",
+      mobileIcon: "bi-question-circle",
+    }
   ];
 
   const redirectURLs = ["", "projects", "intern-rankings", "Setting", "help"];
