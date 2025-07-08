@@ -42,19 +42,22 @@ import InternRaiseTicket from "./InternRaiseTicket";
 import MyTickets from "./MyTickets";
 import { Import } from "lucide-react";
 import NotVerified from "./NotVerified";
+import AdminCommHome from "@/Admin/AdminCommHome";
+import AdminCommTickets from "@/Admin/AdminCommTickets";
 
 
 
-
-export { Home, NewPasswordForm, Notifications,BatchDashboard, OTPVerification, 
-HarassmentEmailForm, Settings, AdminNotify, IntroPage, 
-ResetPassword, Reports, UserAttendance, NotAuthorized, 
-Projects, FAQ, SettingsPage, Categories, Dashboard, 
-Stores, Signin, SignUp, Logout, 
-Profile, Aboutus, CustomNavbar, AdminHomePage,
- AdminProject, AdminTask, AdminReport, PrivacyPolicy, 
- Help, AllUsers, AdminHelpPage, InternAttendance,
- AdminHelp, InternTasksSubmissions, LeaveApplication, Internleaveapplication,
-InternRankings,InternRaiseTicket,MyTickets,NotVerified }
+export {
+    Home, NewPasswordForm, Notifications, BatchDashboard, OTPVerification,
+    HarassmentEmailForm, Settings, AdminNotify, IntroPage,
+    ResetPassword, Reports, UserAttendance, NotAuthorized,
+    Projects, FAQ, SettingsPage, Categories, Dashboard,
+    Stores, Signin, SignUp, Logout,
+    Profile, Aboutus, CustomNavbar, AdminHomePage,
+    AdminProject, AdminTask, AdminReport, PrivacyPolicy,
+    Help, AllUsers, AdminHelpPage, InternAttendance,
+    AdminHelp, InternTasksSubmissions, LeaveApplication, Internleaveapplication,
+    InternRankings, InternRaiseTicket, MyTickets, NotVerified, AdminCommHome, AdminCommTickets
+}
 
 

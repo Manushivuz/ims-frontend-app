@@ -41,6 +41,8 @@ import {
   InternRankings,
   InternRaiseTicket,
   MyTickets,
+  AdminCommTickets,
+  AdminCommHome
 } from "./Pages/pageIndex";
 import {
   AdminTask,
@@ -167,6 +169,22 @@ const App = () => {
           element={
             <AdminRoute>
               <AdminHelpPage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admincommtickets"
+          element={
+            <AdminRoute>
+              <AdminCommTickets />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admincommhome"
+          element={
+            <AdminRoute>
+              <AdminCommHome />
             </AdminRoute>
           }
         />
