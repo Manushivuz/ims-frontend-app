@@ -193,13 +193,13 @@ const MyTickets = () => {
         setSelectedTicket(ticket);
         setMobileSidebarOpen(false);
       }}
-      className={`border rounded-lg p-4 cursor-pointer transition-all duration-200 ${selectedTicket?._id === ticket._id
+      className={`border rounded-lg p-3 sm:p-4 cursor-pointer transition-all duration-200 ${selectedTicket?._id === ticket._id
         ? "bg-indigo-50 border-indigo-300 shadow-sm"
         : "border-gray-200 hover:bg-gray-50 hover:shadow-xs"
         }`}
     >
-      <div className="flex justify-between items-start">
-        <h3 className="font-semibold text-gray-800">{ticket.title}</h3>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0">
+        <h3 className="font-semibold text-gray-800 text-sm sm:text-base">{ticket.title}</h3>
         <span
           className={`px-2 py-1 rounded-full text-xs ${ticket.status === "Open"
             ? "bg-green-100 text-green-800"
@@ -213,7 +213,7 @@ const MyTickets = () => {
           {ticket.status}
         </span>
       </div>
-      <p className="text-sm text-gray-600 mt-1 truncate">
+      <p className="text-xs sm:text-sm text-gray-600 mt-1 truncate">
         {ticket.description.slice(0, 60)}...
       </p>
     </div>
@@ -222,12 +222,12 @@ const MyTickets = () => {
   // Message Bubble Component
   const MessageBubble = ({ msg }) => (
     <div
-      className={`px-4 py-3 rounded-2xl max-w-xs md:max-w-md ${isMe(msg)
+      className={`px-3 sm:px-4 py-2 sm:py-3 rounded-2xl max-w-[280px] sm:max-w-xs md:max-w-md ${isMe(msg)
         ? "bg-gray-600 text-white rounded-br-none shadow-md"
         : "bg-green-200 text-gray-900 rounded-bl-none shadow-sm border border-gray-200"
         }`}
     >
-      <p className="text-sm">{msg.text}</p>
+      <p className="text-xs sm:text-sm">{msg.text}</p>
       <p
         className={`text-xs mt-1 ${isMe(msg) ? "text-indigo-100" : "text-gray-500"
           }`}
@@ -239,29 +239,29 @@ const MyTickets = () => {
 
   // Chat Header Component
   const ChatHeader = () => (
-    <div className="border-b border-gray-200 p-4 bg-indigo-600 text-white">
-      <div className="flex items-center gap-3">
+    <div className="border-b border-gray-200 p-3 sm:p-4 bg-indigo-600 text-white">
+      <div className="flex items-center gap-2 sm:gap-3">
         <button
           className="md:hidden p-1 rounded-full hover:bg-indigo-700"
           onClick={() => setMobileSidebarOpen(true)}
         >
-          <Menu className="w-5 h-5" />
+          <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
         <div className="flex-1">
-          <h3 className="text-lg md:text-xl font-bold">{selectedTicket.title}</h3>
+          <h3 className="text-base sm:text-lg md:text-xl font-bold">{selectedTicket.title}</h3>
           {selectedTicket.assignedTo ? (
-            <p className="text-indigo-100 text-xs md:text-sm mt-1">
+            <p className="text-indigo-100 text-xs sm:text-sm mt-1">
               {selectedTicket.assignedTo.name} will connect with you shortly
             </p>
           ) : (
-            <p className="text-indigo-100 text-xs md:text-sm mt-1">
+            <p className="text-indigo-100 text-xs sm:text-sm mt-1">
               Connecting with the right person. This might take minutes.
             </p>
           )}
         </div>
         {selectedTicket.status === "Closed" && (
-          <div className="flex items-center gap-1 text-indigo-100 text-xs md:text-sm">
-            <Lock className="w-4 h-4" />
+          <div className="flex items-center gap-1 text-indigo-100 text-xs sm:text-sm">
+            <Lock className="w-3 h-3 sm:w-4 sm:h-4" />
             Closed
           </div>
         )}
@@ -280,7 +280,7 @@ const MyTickets = () => {
     }, [selectedTicket]);
 
     return (
-      <div className="border-t border-gray-200 p-4 bg-white">
+      <div className="border-t border-gray-200 p-3 sm:p-4 bg-white">
         {selectedTicket.assignedTo ? (
           canSend ? (
             <div className="flex items-center gap-2">
@@ -288,51 +288,36 @@ const MyTickets = () => {
                 ref={inputRef}
                 type="text"
                 value={content}
-                onChange={(e) => {
-                  setContent(e.target.value);
-                  if (socket && selectedTicket?.assignedTo) {
-                    socket.emit("typing", {
-                      senderId: userId,
-                      receiverId: selectedTicket.assignedTo._id,
-                    });
-                    const typingTimeout = setTimeout(() => {
-                      socket.emit("stopTyping", {
-                        senderId: userId,
-                        receiverId: selectedTicket.assignedTo._id,
-                      });
-                    }, 1000);
-                    return () => clearTimeout(typingTimeout);
-                  }
-                }}
+                onChange={handleTyping}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleSend();
                 }}
                 placeholder="Type your message..."
-                className="flex-1 border border-gray-300 px-4 py-2 md:py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="flex-1 border border-gray-300 px-3 sm:px-4 py-2 sm:py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-xs sm:text-sm"
                 disabled={isSending}
               />
               <button
                 onClick={handleSend}
                 disabled={!content.trim() || isSending}
-                className={`p-2 md:p-3 rounded-full ${!content.trim() || isSending
+                className={`p-2 sm:p-3 rounded-full ${!content.trim() || isSending
                     ? "bg-gray-300 text-gray-500"
                     : "bg-indigo-600 hover:bg-indigo-700 text-white shadow-md transform hover:scale-105 transition-all"
                   }`}
               >
                 {isSending ? (
-                  <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin" />
+                  <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
                 ) : (
-                  <Send className="w-4 h-4 md:w-5 md:h-5" />
+                  <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                 )}
               </button>
             </div>
           ) : (
-            <p className="text-xs md:text-sm text-gray-500 text-center">
+            <p className="text-xs sm:text-sm text-gray-500 text-center">
               Waiting for {selectedTicket.assignedTo.name} to start the conversation
             </p>
           )
         ) : (
-          <p className="text-xs md:text-sm text-gray-500 text-center">
+          <p className="text-xs sm:text-sm text-gray-500 text-center">
             Waiting for the team to assign someone to this ticket
           </p>
         )}
@@ -345,19 +330,19 @@ const MyTickets = () => {
     <div className="fixed inset-0 z-40 md:hidden">
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setMobileSidebarOpen(false)} />
       <div className="absolute left-0 top-0 bottom-0 w-4/5 max-w-sm bg-white shadow-xl">
-        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-          <h2 className="text-xl font-bold text-gray-800">My Tickets</h2>
+        <div className="p-3 sm:p-4 border-b border-gray-200 flex justify-between items-center">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-800">My Tickets</h2>
           <button onClick={() => setMobileSidebarOpen(false)} className="p-1 rounded-full hover:bg-gray-100">
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
-        <div className="p-4 overflow-y-auto h-[calc(100%-56px)]">
+        <div className="p-3 sm:p-4 overflow-y-auto h-[calc(100%-56px)]">
           {tickets.length === 0 ? (
-            <div className="text-center py-10">
-              <p className="text-gray-500">No tickets raised yet</p>
+            <div className="text-center py-8 sm:py-10">
+              <p className="text-gray-500 text-sm sm:text-base">No tickets raised yet</p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {tickets.map((ticket) => (
                 <TicketListItem key={ticket._id} ticket={ticket} />
               ))}
@@ -371,26 +356,26 @@ const MyTickets = () => {
   return (
     <div className="flex flex-col h-[calc(100vh-80px)] bg-gray-50">
       {/* Mobile Header */}
-      <div className="md:hidden p-4 border-b border-gray-200 bg-white flex items-center justify-between">
-        <h2 className="text-xl font-bold text-gray-800">My Tickets</h2>
+      <div className="md:hidden p-3 sm:p-4 border-b border-gray-200 bg-white flex items-center justify-between">
+        <h2 className="text-lg sm:text-xl font-bold text-gray-800">My Tickets</h2>
         <button
           onClick={() => setMobileSidebarOpen(true)}
           className="p-1 rounded-full hover:bg-gray-100"
         >
-          <Menu className="w-5 h-5" />
+          <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       </div>
 
       <div className="flex flex-1 overflow-hidden">
         {/* Desktop Sidebar */}
-        <div className="hidden md:block w-full md:w-1/3 lg:w-1/4 border-r border-gray-200 bg-white overflow-y-auto p-4 md:p-6">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">My Tickets</h2>
+        <div className="hidden md:block w-full md:w-1/3 lg:w-1/4 border-r border-gray-200 bg-white overflow-y-auto p-3 sm:p-4 md:p-6">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-3 sm:mb-4 md:mb-6">My Tickets</h2>
           {tickets.length === 0 ? (
-            <div className="text-center py-10">
-              <p className="text-gray-500">No tickets raised yet</p>
+            <div className="text-center py-8 sm:py-10">
+              <p className="text-gray-500 text-sm sm:text-base">No tickets raised yet</p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {tickets.map((ticket) => (
                 <TicketListItem key={ticket._id} ticket={ticket} />
               ))}
@@ -405,10 +390,10 @@ const MyTickets = () => {
               <ChatHeader />
 
               {/* Messages */}
-              <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-gradient-to-b from-gray-50 to-white space-y-4">
+              <div className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 bg-gradient-to-b from-gray-50 to-white space-y-3 sm:space-y-4">
                 {loadingMessages ? (
                   <div className="flex justify-center items-center h-full">
-                    <Loader2 className="animate-spin w-8 h-8 text-indigo-500" />
+                    <Loader2 className="animate-spin w-6 h-6 sm:w-8 sm:h-8 text-indigo-500" />
                   </div>
                 ) : (
                   <>
@@ -421,7 +406,7 @@ const MyTickets = () => {
                       </div>
                     ))}
                     {isTyping && (
-                      <div className="flex items-center space-x-1 text-sm text-gray-500">
+                      <div className="flex items-center space-x-1 text-xs sm:text-sm text-gray-500">
                         <Dot className="animate-bounce" />
                         <Dot className="animate-bounce" style={{ animationDelay: "0.1s" }} />
                         <Dot className="animate-bounce" style={{ animationDelay: "0.2s" }} />
@@ -437,24 +422,24 @@ const MyTickets = () => {
 
               {/* Confirmation Modal */}
               {showConfirmModal && (
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-                  <div className="bg-white p-6 rounded-xl shadow-xl max-w-sm w-full mx-4">
-                    <h3 className="text-lg font-semibold mb-4">
+                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-3 sm:p-4">
+                  <div className="bg-white p-4 sm:p-6 rounded-xl shadow-xl max-w-sm w-full mx-2 sm:mx-4">
+                    <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
                       Confirm if the issue is resolved
                     </h3>
-                    <p className="text-sm text-gray-600 mb-6">
+                    <p className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6">
                       Do you confirm that this ticket has been resolved?
                     </p>
-                    <div className="flex justify-end gap-3">
+                    <div className="flex justify-end gap-2 sm:gap-3">
                       <button
                         onClick={() => handleStatusUpdate("In Progress")}
-                        className="px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100"
+                        className="px-3 sm:px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 text-xs sm:text-sm"
                       >
                         No
                       </button>
                       <button
                         onClick={() => handleStatusUpdate("Closed")}
-                        className="px-4 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700"
+                        className="px-3 sm:px-4 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 text-xs sm:text-sm"
                       >
                         Yes
                       </button>
@@ -464,12 +449,12 @@ const MyTickets = () => {
               )}
             </>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center bg-gray-50 text-gray-500 p-4">
-              <div className="text-center p-6 max-w-md">
-                <div className="mx-auto w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+            <div className="flex-1 flex flex-col items-center justify-center bg-gray-50 text-gray-500 p-3 sm:p-4">
+              <div className="text-center p-4 sm:p-6 max-w-md">
+                <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-indigo-600"
+                    className="h-6 w-6 sm:h-8 sm:w-8 text-indigo-600"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -482,15 +467,15 @@ const MyTickets = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-medium text-gray-800 mb-1">
+                <h3 className="text-base sm:text-lg font-medium text-gray-800 mb-1">
                   No ticket selected
                 </h3>
-                <p className="text-gray-500">
+                <p className="text-gray-500 text-xs sm:text-sm">
                   Select a ticket from the left panel to view details
                 </p>
                 <button
                   onClick={() => setMobileSidebarOpen(true)}
-                  className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md md:hidden"
+                  className="mt-3 sm:mt-4 px-3 sm:px-4 py-2 bg-indigo-600 text-white rounded-md md:hidden text-xs sm:text-sm"
                 >
                   View Tickets
                 </button>

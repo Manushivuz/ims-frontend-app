@@ -74,9 +74,9 @@ const Help = () => {
       <Navbar />
       <div className="flex flex-col min-h-screen bg-gray-50">
         <div className="flex-grow ml-0 lg:ml-36">
-          <main className="min-h-screen p-8">
-            <div className="relative px-8 mb-8 text-center bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg py-14">
-              <h2 className="mb-6 text-4xl font-bold text-white">
+          <main className="min-h-screen p-3 sm:p-4 md:p-6 lg:p-8">
+            <div className="relative px-4 sm:px-6 md:px-8 mb-6 sm:mb-8 text-center bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg py-8 sm:py-10 md:py-14">
+              <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                 Hello, How can we Help?
               </h2>
               <div className="max-w-xl mx-auto">
@@ -86,27 +86,27 @@ const Help = () => {
                     placeholder="Search for help..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-3 pl-12 text-lg bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-10 sm:pl-12 text-sm sm:text-base md:text-lg bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
-                  <Search className="absolute w-6 h-6 text-gray-400 transform -translate-y-1/2 left-4 top-1/2" />
+                  <Search className="absolute w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-400 transform -translate-y-1/2 left-3 sm:left-4 top-1/2" />
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 p-2 sm:p-4 sm:grid-cols-2 lg:grid-cols-3">
               {filteredCards.map((card, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 h-64"
+                  className="flex flex-col items-center p-4 sm:p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 h-48 sm:h-56 md:h-64"
                 >
-                  <div className="mb-4 text-5xl">{card.icon}</div>
-                  <h3 className="mb-3 text-xl font-semibold text-gray-800">
+                  <div className="mb-3 sm:mb-4 text-3xl sm:text-4xl md:text-5xl">{card.icon}</div>
+                  <h3 className="mb-2 sm:mb-3 text-lg sm:text-xl font-semibold text-gray-800 text-center">
                     {card.title}
                   </h3>
-                  <p className="text-gray-600 text-center">
+                  <p className="text-gray-600 text-center text-xs sm:text-sm md:text-base flex-1">
                     {card.description}
                   </p>
-                  <span className="mt-4 px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-full">
+                  <span className="mt-3 sm:mt-4 px-2 sm:px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-full">
                     {card.category}
                   </span>
                 </div>

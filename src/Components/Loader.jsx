@@ -11,9 +11,9 @@ const Loader = ({
 }) => {
   // Size variants mapping
   const sizeMap = {
-    small: "w-4 h-4",
-    medium: "w-8 h-8",
-    large: "w-12 h-12",
+    small: "w-3 h-3 sm:w-4 sm:h-4",
+    medium: "w-6 h-6 sm:w-8 sm:h-8",
+    large: "w-10 h-10 sm:w-12 sm:h-12",
   };
 
   // Color variants mapping
@@ -30,7 +30,7 @@ const Loader = ({
     <div
       className={`
       ${sizeMap[size]} 
-      border-4 
+      border-2 sm:border-4 
       border-t-transparent 
       rounded-full 
       animate-spin 
@@ -41,17 +41,17 @@ const Loader = ({
 
   // Pulse dots component
   const PulseDots = () => (
-    <div className="flex space-x-2">
+    <div className="flex space-x-1 sm:space-x-2">
       {[1, 2, 3].map((dot) => (
         <div
           key={dot}
           className={`
             ${
               size === "small"
-                ? "w-2 h-2"
+                ? "w-1.5 h-1.5 sm:w-2 sm:h-2"
                 : size === "large"
-                ? "w-4 h-4"
-                : "w-3 h-3"
+                ? "w-3 h-3 sm:w-4 sm:h-4"
+                : "w-2 h-2 sm:w-3 sm:h-3"
             }
             rounded-full
             bg-current
@@ -64,14 +64,14 @@ const Loader = ({
 
   // Progress bar component
   const ProgressBar = () => (
-    <div className="w-full max-w-md h-2 bg-gray-200 rounded-full overflow-hidden">
+    <div className="w-full max-w-xs sm:max-w-md h-1.5 sm:h-2 bg-gray-200 rounded-full overflow-hidden">
       <div className={`h-full ${colorMap[color]} animate-loading-bar`} />
     </div>
   );
 
   // Content wrapper for consistent spacing
   const ContentWrapper = ({ children }) => (
-    <div className="flex flex-col items-center justify-center space-y-4">
+    <div className="flex flex-col items-center justify-center space-y-2 sm:space-y-4">
       {children}
     </div>
   );
@@ -89,11 +89,11 @@ const Loader = ({
               className={`text-${color === "primary" ? "blue" : color}-600 
               ${
                 size === "small"
-                  ? "text-sm"
+                  ? "text-xs sm:text-sm"
                   : size === "large"
-                  ? "text-lg"
-                  : "text-base"
-              }`}
+                  ? "text-base sm:text-lg"
+                  : "text-sm sm:text-base"
+              } font-medium`}
             >
               {text}
             </p>
@@ -116,11 +116,11 @@ const Loader = ({
             className={`text-${color === "primary" ? "blue" : color}-600 
             ${
               size === "small"
-                ? "text-sm"
+                ? "text-xs sm:text-sm"
                 : size === "large"
-                ? "text-lg"
-                : "text-base"
-            }`}
+                ? "text-base sm:text-lg"
+                : "text-sm sm:text-base"
+            } font-medium`}
           >
             {text}
           </p>

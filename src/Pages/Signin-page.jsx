@@ -126,35 +126,35 @@ const Signin = ({ onSwitchToSignup }) => {
   return (
     <>
 
-      <div className="flex items-center justify-center min-h-screen px-4 bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="w-full max-w-md p-8 transition-all duration-300 bg-white border border-gray-100 shadow-2xl rounded-xl hover:shadow-3xl">
-          <div className="mb-6 text-center">
-            <div className="mx-auto mb-4 w-28 h-28">
+      <div className="flex items-center justify-center min-h-screen px-3 sm:px-4 bg-gradient-to-br from-blue-50 to-purple-50 py-4 sm:py-6">
+        <div className="w-full max-w-sm sm:max-w-md p-4 sm:p-6 md:p-8 transition-all duration-300 bg-white border border-gray-100 shadow-2xl rounded-xl hover:shadow-3xl">
+          <div className="mb-4 sm:mb-6 text-center">
+            <div className="mx-auto mb-3 sm:mb-4 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28">
               <img
                 src={iispprLogo}
                 alt="IISPPR Logo"
                 className="object-contain w-full h-full"
               />
             </div>
-            <h1 className="mb-2 text-3xl font-bold text-blue-800">
+            <h1 className="mb-2 text-2xl sm:text-3xl font-bold text-blue-800">
               Welcome Back
             </h1>
-            <p className="text-sm text-gray-500">
+            <p className="text-xs sm:text-sm text-gray-500">
               Log in to continue to your account
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             <div className="relative">
               <label
                 htmlFor="email"
-                className="block mb-1 text-sm text-gray-600"
+                className="block mb-1 text-xs sm:text-sm text-gray-600"
               >
                 Email Address
               </label>
               <div className="relative">
                 <Mail
-                  className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2"
+                  className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2 w-4 h-4 sm:w-5 sm:h-5"
                   size={20}
                 />
                 <input
@@ -164,7 +164,7 @@ const Signin = ({ onSwitchToSignup }) => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="Enter your email"
-                  className="w-full p-3 pl-10 text-sm transition-all duration-300 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+                  className="w-full p-2.5 sm:p-3 pl-8 sm:pl-10 text-xs sm:text-sm transition-all duration-300 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
                 />
               </div>
             </div>
@@ -172,13 +172,13 @@ const Signin = ({ onSwitchToSignup }) => {
             <div className="relative">
               <label
                 htmlFor="password"
-                className="block mb-1 text-sm text-gray-600"
+                className="block mb-1 text-xs sm:text-sm text-gray-600"
               >
                 Password
               </label>
               <div className="relative">
                 <Lock
-                  className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2"
+                  className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2 w-4 h-4 sm:w-5 sm:h-5"
                   size={20}
                 />
                 <input
@@ -188,12 +188,12 @@ const Signin = ({ onSwitchToSignup }) => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="Enter your password"
-                  className="w-full p-3 pl-10 text-sm transition-all duration-300 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+                  className="w-full p-2.5 sm:p-3 pl-8 sm:pl-10 pr-12 sm:pr-12 text-xs sm:text-sm transition-all duration-300 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute text-gray-400 transition-colors transform -translate-y-1/2 right-3 top-1/2 hover:text-blue-500"
+                  className="absolute text-gray-400 transition-colors transform -translate-y-1/2 right-3 top-1/2 hover:text-blue-500 text-xs sm:text-sm"
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
@@ -207,7 +207,7 @@ const Signin = ({ onSwitchToSignup }) => {
             </div>
 
             {error && (
-              <p className="p-2 text-sm text-center text-red-500 rounded-md bg-red-50">
+              <p className="p-2 text-xs sm:text-sm text-center text-red-500 rounded-md bg-red-50">
                 {error}
               </p>
             )}
@@ -216,12 +216,12 @@ const Signin = ({ onSwitchToSignup }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="flex items-center justify-center w-full gap-2 p-3 text-sm font-semibold text-white transition-all duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-700 hover:-translate-y-1 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center justify-center w-full gap-2 p-2.5 sm:p-3 text-xs sm:text-sm font-semibold text-white transition-all duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-700 hover:-translate-y-1 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
                   <svg
-                    className="w-5 h-5 mr-3 -ml-1 text-white animate-spin"
+                    className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 -ml-1 text-white animate-spin"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -240,24 +240,24 @@ const Signin = ({ onSwitchToSignup }) => {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  Logging In...
+                  <span className="text-xs sm:text-sm">Logging In...</span>
                 </>
               ) : (
                 <>
-                  <LogIn size={20} />
-                  Login
+                  <LogIn className="w-4 h-4 sm:w-5 sm:h-5" size={20} />
+                  <span className="text-xs sm:text-sm">Login</span>
                 </>
               )}
             </button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+          <div className="mt-4 sm:mt-6 text-center">
+            <p className="text-xs sm:text-sm text-gray-600">
               {`Don't`} have an account?{" "}
               <a
                 href="/signup"
                 onClick={onSwitchToSignup}
-                className="font-semibold text-blue-700 hover:underline"
+                className="font-semibold text-blue-700 hover:underline text-xs sm:text-sm"
               >
                 Sign Up
               </a>

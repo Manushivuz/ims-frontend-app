@@ -144,18 +144,18 @@ export default function TaskModal({ taskId }) {
       <Dialog open={true} onClose={() => { }} className="relative z-50">
         <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
         <div className="fixed inset-0 z-50 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4">
-            <DialogPanel className="relative w-full max-w-lg rounded-lg bg-white p-8 text-center">
-              <div className="flex flex-col items-center space-y-4">
-                <Loader2 className="h-12 w-12 animate-spin text-blue-600" />
-                <p className="text-xl font-semibold text-gray-900">
+          <div className="flex min-h-full items-center justify-center p-3 sm:p-4">
+            <DialogPanel className="relative w-full max-w-sm sm:max-w-lg rounded-lg bg-white p-6 sm:p-8 text-center">
+              <div className="flex flex-col items-center space-y-3 sm:space-y-4">
+                <Loader2 className="h-8 w-8 sm:h-12 sm:w-12 animate-spin text-blue-600" />
+                <p className="text-lg sm:text-xl font-semibold text-gray-900">
                   Submitting your task...
                 </p>
-                <p className="text-sm text-gray-500">
+                <p className="text-xs sm:text-sm text-gray-500">
                   Please wait while we process your submission
                 </p>
-                <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full animate-pulse"></div>
+                <div className="mt-3 sm:mt-4 w-full bg-gray-200 rounded-full h-1.5 sm:h-2">
+                  <div className="bg-blue-600 h-1.5 sm:h-2 rounded-full animate-pulse"></div>
                 </div>
               </div>
             </DialogPanel>
@@ -169,48 +169,50 @@ export default function TaskModal({ taskId }) {
     <Dialog open={open} onClose={setOpen} className="relative z-50">
       <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
       <div className="fixed inset-0 z-50 overflow-y-auto">
-        <div className="flex min-h-screen items-start justify-center pt-16 px-4">
-          <DialogPanel className="w-full max-w-lg rounded-lg bg-white shadow-xl">
-            <div className="max-h-[80vh] overflow-y-auto">
-              <div className="relative p-6">
+        <div className="flex min-h-screen items-start justify-center pt-8 sm:pt-16 px-3 sm:px-4">
+          <DialogPanel className="w-full max-w-sm sm:max-w-lg rounded-lg bg-white shadow-xl">
+            <div className="max-h-[85vh] sm:max-h-[80vh] overflow-y-auto">
+              <div className="relative p-4 sm:p-6">
                 <button
                   onClick={() => setModalView(false)}
-                  className="absolute right-4 top-4 text-gray-400 hover:text-gray-500"
+                  className="absolute right-3 sm:right-4 top-3 sm:top-4 text-gray-400 hover:text-gray-500 p-1"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
-                <DialogTitle className="text-xl font-semibold text-gray-900">
+                <DialogTitle className="text-lg sm:text-xl font-semibold text-gray-900 pr-8">
                   Submit Your Task
                 </DialogTitle>
-                <p className="mt-2 text-sm text-gray-500">
+                <p className="mt-2 text-xs sm:text-sm text-gray-500">
                   Complete your task submission by providing the required
                   information below
                 </p>
 
-                <div className="mt-6 space-y-6">
-                  {/* Label */}
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Status
-                  </label>
-
-                  {/* Input Field */}
-                  <div className="relative group w-full">
-                    <input
-                      type="text"
-                      onChange={(e) => setStatus(e.target.value)}
-                      maxLength={20}
-                      placeholder="Eg. completed or pending ..."
-                      className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:ring-blue-500"
-                    />
-                    {/* Tooltip */}
-                    <div className="absolute left-1/2 bottom-full mb-2 w-64 -translate-x-1/2 rounded bg-gray-700 px-3 py-2 text-xs text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
-                      Make sure to write <b>completed</b> in lowercase to mark
-                      the task as completed. However, HR and admin will verify
-                      the task before it is finalized.
+                <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
+                  {/* Status Field */}
+                  <div>
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+                      Status
+                    </label>
+                    <div className="relative group w-full">
+                      <input
+                        type="text"
+                        onChange={(e) => setStatus(e.target.value)}
+                        maxLength={20}
+                        placeholder="Eg. completed or pending ..."
+                        className="block w-full rounded-md border border-gray-300 px-3 py-2 text-xs sm:text-sm text-gray-700 focus:border-blue-500 focus:ring-blue-500"
+                      />
+                      {/* Tooltip */}
+                      <div className="absolute left-1/2 bottom-full mb-2 w-48 sm:w-64 -translate-x-1/2 rounded bg-gray-700 px-2 sm:px-3 py-1.5 sm:py-2 text-xs text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
+                        Make sure to write <b>completed</b> in lowercase to mark
+                        the task as completed. However, HR and admin will verify
+                        the task before it is finalized.
+                      </div>
                     </div>
                   </div>
+
+                  {/* Task Description */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700">
                       Task Description
                       <span className="text-red-500 ml-1">*</span>
                     </label>
@@ -218,7 +220,7 @@ export default function TaskModal({ taskId }) {
                       value={comments}
                       onChange={(e) => setComments(e.target.value)}
                       placeholder="Provide details about your task completion..."
-                      className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3 text-sm placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
+                      className="mt-1 sm:mt-2 block w-full rounded-md border border-gray-300 px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
                       rows="4"
                     />
                     {!comments.trim() && (
@@ -229,8 +231,9 @@ export default function TaskModal({ taskId }) {
                     )}
                   </div>
 
+                  {/* Image Upload */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700">
                       Upload Image
                     </label>
                     <div
@@ -238,14 +241,14 @@ export default function TaskModal({ taskId }) {
                       onDragLeave={handleDrag}
                       onDragOver={handleDrag}
                       onDrop={(e) => handleDrop(e, "image")}
-                      className={`mt-2 flex justify-center rounded-lg border-2 border-dashed p-6 ${dragActive
+                      className={`mt-1 sm:mt-2 flex justify-center rounded-lg border-2 border-dashed p-4 sm:p-6 ${dragActive
                         ? "border-blue-500 bg-blue-50"
                         : "border-gray-300"
                         }`}
                     >
                       <div className="text-center">
-                        <ImageIcon className="mx-auto h-12 w-12 text-gray-400" />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                        <ImageIcon className="mx-auto h-8 w-8 sm:h-12 sm:w-12 text-gray-400" />
+                        <div className="mt-3 sm:mt-4 flex text-xs sm:text-sm leading-6 text-gray-600">
                           <label className="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500">
                             <span>Upload an image</span>
                             <input
@@ -261,14 +264,14 @@ export default function TaskModal({ taskId }) {
                           PNG, JPG, GIF up to 5MB
                         </p>
                         {image && (
-                          <div className="mt-2 flex items-center gap-2 text-sm text-gray-500">
-                            <ImageIcon className="h-4 w-4" />
-                            {image.name}
+                          <div className="mt-2 flex items-center gap-2 text-xs sm:text-sm text-gray-500">
+                            <ImageIcon className="h-3 w-3 sm:h-4 sm:w-4" />
+                            <span className="truncate">{image.name}</span>
                             <button
                               onClick={() => setImage(null)}
-                              className="text-red-500 hover:text-red-600"
+                              className="text-red-500 hover:text-red-600 flex-shrink-0"
                             >
-                              <X className="h-4 w-4" />
+                              <X className="h-3 w-3 sm:h-4 sm:w-4" />
                             </button>
                           </div>
                         )}
@@ -278,17 +281,18 @@ export default function TaskModal({ taskId }) {
                 </div>
               </div>
 
-              <div className="sticky bottom-0 bg-gray-50 px-6 py-4 flex justify-end space-x-3 rounded-b-lg">
+              {/* Footer Actions */}
+              <div className="sticky bottom-0 bg-gray-50 px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 rounded-b-lg">
                 <button
                   onClick={() => setModalView(false)}
-                  className="rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                  className="rounded-md px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 order-2 sm:order-1"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSubmit}
                   disabled={!comments.trim()}
-                  className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="rounded-md bg-blue-600 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed order-1 sm:order-2"
                 >
                   Submit Task
                 </button>
