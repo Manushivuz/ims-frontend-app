@@ -3,6 +3,7 @@ import useTitle from "@/Components/useTitle";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import BatchTeams from '../Components/BatchManagment/BatchTeams.jsx';
 
 import {
   BatchStats,
@@ -506,6 +507,9 @@ function BatchManagement() {
               Manage month-wise intern sessions and track batch performance
             </p>
           </div>
+
+          {/* Render the team manager at the top for demonstration */}
+          <BatchTeams batchId={batchData[0]?.id || ""} />
 
           <BatchStats batchData={batchData} />
           <QuickActions setShowCreateForm={setShowCreateForm} />

@@ -13,7 +13,7 @@ import {
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import axios from "axios";
-import { localReqUser, reqUser } from "./URIs.js";
+import { devReqUser, reqUser } from "./URIs.js";
 
 export default function Settings() {
   const [userDetails, setUserDetails] = useState({
@@ -24,7 +24,7 @@ export default function Settings() {
   });
   const userId = localStorage.getItem("userId");
   useEffect(() => {
-    axios.get(`${localReqUser}/${userId}`).then((res) => {
+    axios.get(`${devReqUser}/${userId}`).then((res) => {
       setUserDetails(res.data);
     });
   }, []);
